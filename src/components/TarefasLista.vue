@@ -1,0 +1,35 @@
+<template>
+    <div>
+        <h1 class="font-weight-light">Lista de Tarefas</h1>
+        <ul class="list-group" v-if="tarefas.length > 0">
+            <TarefasListaItem
+                v-for="tarefa in tarefas"
+                :key="tarefa.id"
+                :tarefa="tarefa"/>
+        </ul>
+
+        <p v-else>Nenhuma tarefa foi criada.</p>
+        <TarefasSalvar/>
+    </div>
+</template>
+
+<script>
+import TarefasSalvar from './TarefasSalvar.vue'
+import TarefasListaItem from './TarefasListaItem.vue'
+
+export default{
+    components: {
+        TarefasSalvar,
+        TarefasListaItem
+    },
+    data() {
+        return {
+            tarefas: [
+                {id: 1, titulo: 'Aprender JavaScript', concluido: true},
+                {id: 2, titulo: 'Aprender Vue', concluido: true},
+                {id: 3, titulo: 'Aprender Axios', concluido: false},
+            ]
+        }
+    }
+}
+</script>
