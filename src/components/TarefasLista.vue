@@ -18,13 +18,16 @@
             <TarefasListaItem
                 v-for="tarefa in tarefas"
                 :key="tarefa.id"
-                :tarefa="tarefa"/>
+                :tarefa="tarefa"
+                @editar="selecionarTarefaParaEdicao"/>
         </ul>
 
         <p v-else>Nenhuma tarefa foi criada.</p>
         <TarefasSalvar
             v-if="exibirFormulario"
-            @criar="criarTarefa"/>
+            :tarefa="tarefaSelecionada"
+            @criar="criarTarefa"
+            @editar="editarTarefa"/>
     </div>
 </template>
 
@@ -43,7 +46,8 @@ export default{
     data() {
         return {
             tarefas: [],
-            exibirFormulario: false
+            exibirFormulario: false,
+            tarefaSelecionada: undefined
         }
     },
     created() {
@@ -61,6 +65,13 @@ export default{
                     console.log('POST /tarefas', response)
                     this.tarefas.push(response.data)
                 })
+        },
+        editarTarefa(tarefa){
+            console.log('EDITAR: ', tarefa)
+        },
+        selecionarTarefaParaEdicao(tarefa) {
+            this.tarefaSelecionada = tarefa
+            this.exibirFormulario = true
         }
     }
 }
