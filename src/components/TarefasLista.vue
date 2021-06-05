@@ -19,7 +19,8 @@
                 v-for="tarefa in tarefas"
                 :key="tarefa.id"
                 :tarefa="tarefa"
-                @editar="selecionarTarefaParaEdicao"/>
+                @editar="selecionarTarefaParaEdicao"
+                @deletar="deletarTarefa"/>
         </ul>
 
         <p v-else>Nenhuma tarefa foi criada.</p>
@@ -59,6 +60,14 @@ export default{
 
     },
     methods: {
+        findIndexTarefa(tarefa){
+            const indice = this.tarefas.findIndex(t => t.id === tarefa.id)
+            this.tarefas.splice(indice, 1, tarefa)
+        },
+        resetar(){
+            this.tarefaSelecionada = undefined
+            this.exibirFormulario = false
+        },
         criarTarefa(tarefa) {
             axios.post(`${config.apiUrl}/tarefas`, tarefa)
                 .then((response) => {
@@ -72,14 +81,20 @@ export default{
             axios.put(`${config.apiUrl}/tarefas/${tarefa.id}`, tarefa)
                 .then(response => {
                     console.log(`PUT /tarefas/${tarefa.id}`, response)
-                    const indice = this.tarefas.findIndex(t => t.id === tarefa.id)
-                    this.tarefas.splice(indice, 1, tarefa)
+                    this.findIndexTarefa()
                     this.resetar()
                 })
-        },
-        resetar(){
-            this.tarefaSelecionada = undefined
-            this.exibirFormulario = false
+        },        
+        deletarTarefa(tarefa){
+            const confirmar = window.confirm(`Você realmente deseja deletar a tarefa "${tarefa.titulo}"?`)
+            if (confirmar){
+                axios.delete(`${config.apiUrl}/tarefas/${tarefa.id}`)
+                    .then(response => {
+                        console.log(`DELETE /tarefas/${tarefa.id}`, response)
+                        const indice = this.tarefas.findIndex(t => t.id === tarefa.id)
+                        this.tarefas.splice(indice, 1)
+                    })
+            }
         },
         selecionarTarefaParaEdicao(tarefa) {
             this.tarefaSelecionada = tarefa
