@@ -8,7 +8,7 @@
     {
       "id": 2,
       "titulo": "Aprender Vue",
-      "concluido": true
+      "concluido": false
     },
     {
       "titulo": "Aprendendo Django",
