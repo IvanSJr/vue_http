@@ -6,7 +6,7 @@
                 <h1 class="font-weight-light">Lista de Tarefas</h1>
             </div>
             <div class="col-sm-2">
-                <button class="btn btn-primary float-right" @click="exibirFormulario = !exibirFormulario">
+                <button class="btn btn-primary float-right" @click="exibirFormularioCriarTarefa">
                     <i class="fa fa-plus mr-2">
                         <span>Criar</span>
                     </i>
@@ -97,7 +97,14 @@ export default{
         selecionarTarefaParaEdicao(tarefa) {
             this.tarefaSelecionada = tarefa
             this.exibirFormulario = true
-        }
+        },
+        exibirFormularioCriarTarefa(){
+            if(this.tarefaSelecionada) {
+                this.tarefaSelecionada = undefined
+                return
+            }
+            this.exibirFormulario = !this.exibirFormulario
+        },
     }
 }
 </script>
