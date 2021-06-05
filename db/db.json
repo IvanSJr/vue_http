@@ -16,8 +16,8 @@
       "concluido": false
     },
     {
-      "titulo": "Aprendendo tarefas",
-      "concluido": false,
+      "titulo": "Aprendendo Django",
+      "concluido": true,
       "id": 4
     },
     {
