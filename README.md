@@ -1,4 +1,5 @@
-# vue_http
+# Requisições HTTP do VueJS
+# Usando a biblioteca Axios para fazer chamadas Ajax à uma API REST
 
 ## Project setup
 ```
