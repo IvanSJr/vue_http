@@ -2,12 +2,12 @@
     <div class="mt-4">
         <hr>
         <h2 class="font-weight-light">Salvar tarefa</h2>
-        <form>
+        <form @submit.prevent="salvar">
             <div class="row">
                 <div :class="classeColuna">
                     <div class="form-group">
                         <label>Titulo</label>
-                        <input type="text" class="form-control" placeholder="Titulo da tarefa">
+                        <input type="text" class="form-control" placeholder="Titulo da tarefa" v-model="tarefaLocal.titulo">
                     </div>
                 </div>
                 <div class="col-sm-2" v-if="tarefa">
@@ -20,7 +20,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-primary" >Salvar</button>
 
         </form>
     </div>
@@ -48,6 +48,12 @@ export default {
             return this.tarefa
                 ? 'col-sm-10'
                 : 'col-sm-12'
+        }
+    },
+    methods: {
+        salvar() {
+            this.$emit('criar', this.tarefaLocal)
+            this.tarefaLocal = {titulo: '', concluido: false}
         }
     }
 }

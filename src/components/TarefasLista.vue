@@ -23,7 +23,8 @@
 
         <p v-else>Nenhuma tarefa foi criada.</p>
         <TarefasSalvar
-            v-if="exibirFormulario"/>
+            v-if="exibirFormulario"
+            @criar="criarTarefa"/>
     </div>
 </template>
 
@@ -48,10 +49,19 @@ export default{
     created() {
         axios.get(`${config.apiUrl}/tarefas`)
             .then((response) => {
-                console.log(response)
+                console.log('GET /tarefas', response)
                 this.tarefas = response.data
             })
 
+    },
+    methods: {
+        criarTarefa(tarefa) {
+            axios.post(`${config.apiUrl}/tarefas`, tarefa)
+                .then((response) => {
+                    console.log('POST /tarefas', response)
+                    this.tarefas.push(response.data)
+                })
+        }
     }
 }
 </script>
