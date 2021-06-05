@@ -16,9 +16,19 @@
       "id": 4
     },
     {
-      "titulo": "Aprendendo python",
+      "titulo": "Aprendendo Python",
       "concluido": false,
       "id": 5
+    },
+    {
+      "titulo": "Aprendendo PHP 8",
+      "concluido": false,
+      "id": 6
+    },
+    {
+      "titulo": "Aprendendo Ajax",
+      "concluido": false,
+      "id": 7
     }
   ]
 }

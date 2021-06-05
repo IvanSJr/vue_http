@@ -60,10 +60,6 @@ export default{
 
     },
     methods: {
-        findIndexTarefa(tarefa){
-            const indice = this.tarefas.findIndex(t => t.id === tarefa.id)
-            this.tarefas.splice(indice, 1, tarefa)
-        },
         resetar(){
             this.tarefaSelecionada = undefined
             this.exibirFormulario = false
@@ -81,7 +77,8 @@ export default{
             axios.put(`${config.apiUrl}/tarefas/${tarefa.id}`, tarefa)
                 .then(response => {
                     console.log(`PUT /tarefas/${tarefa.id}`, response)
-                    this.findIndexTarefa()
+                    const indice = this.tarefas.findIndex(t => t.id === tarefa.id)
+                    this.tarefas.splice(indice, 1, tarefa)
                     this.resetar()
                 })
         },        
